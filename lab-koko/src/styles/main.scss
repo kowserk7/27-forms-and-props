@@ -1,0 +1,57 @@
+header {
+  font-family: Papyrus, fantasy;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+  line-height: 26.4px;
+  text-align: right;
+}
+h2 {
+  font-family: Papyrus, fantasy;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+  line-height: 26.4px;
+  text-align: center;
+}
+
+button {
+  position: absolute;
+  left: 44%;
+  width: 10px;
+  height: 5%;
+  border: 2px solid bisque;
+  border-radius: 15px;
+  background: bisque;
+  font-family: Papyrus, fantasy;
+  font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+  line-height: 26.4px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+
+button:hover {
+  background-color: grey; /* Green */
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  border-radius: 15px;
+  color: white;
+}
+
+
+pre {
+  font-size: 2em;
+  margin-top: 5%;
+  margin-left: 10%;
+  color: black;
+}
+
+html {
+  background: #78DEA1;
+}
