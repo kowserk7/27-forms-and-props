@@ -1,109 +1,111 @@
-import './styles/main.scss';
-import React from 'react';
-import ReactDom from 'react-dom';
-import superagent from 'superagent';
+import './styles/main.scss'
+import React from 'react'
+import ReactDom from 'react-dom'
+import superagent from 'superagent'
 
-const API_URL = 'https://pokeapi.co/api/v2';
+const API_URL = 'http://www.reddit.com/r'
 
-
-export default SearchForm;
 class SearchForm extends React.Component {
   constructor(props){ 
     super(props)
     this.state = {
-      val: '',
+      topic: '',
+      limit: '',
     }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleInputTopic = this.handleInputTopic.bind(this);
+    this.handleInputLimit = this.handleInputLimit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 }
-  handleChange(e) {
-    this.setState({val: e.target.value})
+  handleInputTopic(e) {
+    this.setState({topic: e.target.value})
+  }
+  handleInputLimit(e) {
+    this.setState({limit: e.target.value})
   }
   handleSubmit(e) {
     e.preventDefault()
-    this.props.update_state(this.state.val)
+    this.props.update_state(this.state.topic, this.state.limit)
   }
-
-  
   render() {
     return (
-      <form className="search-form" onSubmit= {this.handleSubmit}>
-        <input type="text" name="pokemon-name" value={this.state.val} onChange={this.handleChange} placeholder="Pokemon Name"/>
-        <button onSubmit= {this.handleSubmit}>Submit</button>
+      <form 
+        className="search-form" 
+        onSubmit= {this.handleSubmit}>
+       <input className={this.props.error ? 'error' : 'input'}
+          type="text"
+          name="topic-search"
+          value={this.state.topic}
+          onChange={this.handleInputTopic}
+          placeholder="Topic"/>
+     <input className={this.props.error ? 'error' : 'input'}
+          type="limit"
+          name="limit-search"
+          value={this.state.limit}
+          onChange={this.handleInputLimit}
+          min="0"
+          max="99"
+          placeholder="Limit"/>
+        <button type="submit">Search</button>
       </form>
     )
   }
 }
 
-
-
-
-class Results extends React.Component {
+class SearchResultList extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
     return (
       <div className="results">
-      {this.props.pokemon ?
-        <section className ="pokemon-data">
-          {console.log(this.props.pokemon)}
-          <h2>{this.props.pokemon.name}</h2>
-          <img
-          src={this.props.pokemon.sprites.front_default}
-          alt={this.props.pokemon.name}
-          />
-        </section>
-        :
-        undefined
-      }
-      {this.props.error ?
-        <section className="pokemon-error">
-          <h2>You broke it</h2>
-        </section>
-        :
-        undefined
-      }
+        {this.props.topic ?
+          <section className="topic-data">
+          <h2>{this.props.value}</h2>
+            {this.props.topic.data.children.map(ele => <li><a href ={ele.data.url}>{ele.data.title}</a><p>{ele.data.ups}</p></li>)}
+          </section>
+          :
+          undefined
+        }
+        {this.props.error ?
+          <section className="topic-error">
+            <h2>You broke it.</h2>
+          </section>
+          :
+          undefined
+        }
       </div>
     )
+
   }
 }
-
-
-
-
-
-
 
 class App extends React.Component {
   constructor(props) {
     super(props); 
     this.state = {
-      pokemon: null,
+      topic: null,
       searchError: null,
+      limit: null,
     }
-    this.searchApi = this.searchApi.bind(this)
+    this.searchAPI = this.searchAPI.bind(this)
     this.updateState = this.updateState.bind(this)
-
   }
-  updateState(name){
-    this.searchAPI(name)
-     .then(res => this.setState({pokemon: res.body, searchError: null}))
-     .catch(err => this.setState({pokemon:null, searchError: err}))
+  updateState(name, limit){
+    this.searchAPI(name, limit)
+     .then(res => this.setState({topic: res.body, searchError: null}))
+     .catch(err => this.setState({topic:null, searchError: err}))
   }
-  searchAPI(name) {
-    return superagent.get(`${API_URL}/pokemon/${name}`)
+  searchAPI(name, limit) {
+    return superagent.get(`${API_URL}/${name}.json?limit=${limit}`)
   }
-
     render() {
       return (
         <div className="app">
+          <h2>Search Topic</h2>
           <SearchForm update_state={this.updateState}/>
-          <Results pokemon={this.state.pokemon} error={this.state.searchError}/>
+          <SearchResultList topic={this.state.topic} error={this.state.searchError}/>
         </div>
       );
     }
-  
 }
 ReactDom.render(<App />, document.getElementById('root'));
-

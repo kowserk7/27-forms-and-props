@@ -16,12 +16,34 @@ h2 {
   line-height: 26.4px;
   text-align: center;
 }
-
+p {
+  text-indent: 50px;
+}
+p, a {
+  font-family: Papyrus, fantasy;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+  line-height: 26.4px;
+  color: darkred;
+}
+input{
+  width: 40%;
+  margin-right: 30%;
+  margin-left: 30%;
+  text-align: center;
+  font-size: 20px;
+  font-family: Papyrus, fantasy;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+  color: darkred;
+}
 button {
-  position: absolute;
-  left: 44%;
-  width: 10px;
-  height: 5%;
+  display: block;
+  margin-top: 2%;
+  margin-right: 48%;
+  margin-left: 47%;
   border: 2px solid bisque;
   border-radius: 15px;
   background: bisque;
@@ -34,24 +56,25 @@ button {
   text-align: center;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+  color: darkred;
 }
-
-
+.error {
+  border: 3px solid red;
+  margin-right: 20px;
+}
 button:hover {
   background-color: grey; /* Green */
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   border-radius: 15px;
   color: white;
 }
-
-
 pre {
   font-size: 2em;
   margin-top: 5%;
   margin-left: 10%;
   color: black;
 }
-
 html {
   background: #78DEA1;
+  color: darkred;
 }

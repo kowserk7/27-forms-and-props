@@ -1,9 +1,9 @@
-# Lab 26 - COWSAY
+# Lab 27 - Reddit Search Engine
 
 **Author**: Koko Kassa
 
 ## Overview
-Cowsay using webpack and react
+Creating a search engine for Reddit using webpack and react
 
 #### Configuration
 * `package.json`
@@ -16,5 +16,4 @@ Cowsay using webpack and react
 * [Javascript](https://www.javascript.com/)
 * [React](https://reactjs.org/)
 * [WebPack](https://webpack.js.org/)
-* [faker](https://www.npmjs.com/package/Faker)
-* [cowsay](https://github.com/schacon/cowsay)
+* [superagent](https://www.npmjs.com/package/superagentr])
